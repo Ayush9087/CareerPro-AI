@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-career-background: #F5EBD5;
+  --color-career-primary: #5F6B35;
+  --color-career-dark: #302A1E;
+  --color-career-accent: #F2B632;
+  --color-career-secondary: #C98D48;
+  --color-career-surface: #F8F0DE;
+  --color-career-border: rgba(95, 107, 53, 0.20);
+  --color-career-text: #302A1E;
+  --color-career-muted: rgba(48, 42, 30, 0.65);
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Custom animations */
+  --animate-slide-down: slide-down 0.3s ease-out;
+  --animate-fade-in: fade-in 0.4s ease-out;
+  --animate-fade-in-up: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-scale-in: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-score-ring: score-ring 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+  --animate-progress-fill: progress-fill 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  --animate-count-up: count-up 0.6s ease-out;
+  --animate-success-pop: success-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-check-draw: check-draw 0.4s ease-out 0.15s both;
+
+  @keyframes slide-down {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes score-ring {
+    from { stroke-dashoffset: 283; }
+  }
+
+  @keyframes progress-fill {
+    from { width: 0; }
+  }
+
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes success-pop {
+    0%   { transform: scale(0.5); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes check-draw {
+    from { stroke-dashoffset: 24; }
+    to   { stroke-dashoffset: 0; }
+  }
+
+  @keyframes subtle-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+@layer base {
+  html {
+    overflow-x: clip;
+  }
+
+  body, #root {
+    min-height: 100dvh;
+    max-width: 100%;
+    overflow-x: clip;
+    background-color: var(--color-career-background);
+  }
+
+  body {
+    color: var(--color-career-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  p, li, td, th, label, span, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: anywhere;
+  }
+
+  .grid > * {
+    min-width: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-career-dark);
+    letter-spacing: -0.025em;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgba(95, 107, 53, 0.2);
+    color: var(--color-career-dark);
+  }
+
+  /* Focus ring — consistent across all interactive elements */
+  :focus-visible {
+    outline: 2px solid var(--color-career-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar (Webkit) — warm, subtle */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(95, 107, 53, 0.18);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(95, 107, 53, 0.32); }
+}
+
+/* ── Layering ──────────────────────────────────────────────── */
+:root {
+  --z-sticky: 30;
+  --z-nav: 40;
+  --z-banner: 50;
+  --app-nav-height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart-frame {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 14rem;
+}
+
+@media (min-width: 768px) {
+  .chart-frame {
+    height: 17.5rem;
+  }
+}
+
+.recharts-wrapper,
+.recharts-responsive-container,
+.recharts-surface {
+  max-width: 100% !important;
+}
+
+/* ── Skeleton pulse — slightly calmer than default ─────────── */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 0.25; }
+}
+
+/* ── Recharts tooltip override for brand consistency ───────── */
+.recharts-default-tooltip {
+  background-color: var(--color-career-surface) !important;
+  border: 1px solid var(--color-career-border) !important;
+  border-radius: 0.75rem !important;
+  font-size: 0.75rem !important;
+  box-shadow: 0 4px 12px rgba(48, 42, 30, 0.08) !important;
+  padding: 0.625rem 0.75rem !important;
+}
+
+/* ── Recharts active dot glow ──────────────────────────────── */
+.recharts-dot.recharts-active-dot circle {
+  filter: drop-shadow(0 0 4px rgba(95, 107, 53, 0.3));
+}
+
+/* ── Progress bar rounded corners ──────────────────────────── */
+.career-progress-track {
+  height: 6px;
+  width: 100%;
+  background: var(--color-career-border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.career-progress-fill {
+  height: 100%;
+  background: var(--color-career-primary);
+  border-radius: 100px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: progress-fill 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ── Page transition wrapper ──────────────────────────────── */
+.page-enter {
+  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Card hover micro-interaction ─────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(48, 42, 30, 0.06);
+    border-color: rgba(95, 107, 53, 0.35);
+  }
+}
+
+/* ── Button press micro-interaction ───────────────────────── */
+.btn-press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* ── Task completion animation ────────────────────────────── */
+.task-complete {
+  animation: success-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Score counter animation  ─────────────────────────────── */
+.score-animate {
+  animation: count-up 0.6s ease-out;
+}

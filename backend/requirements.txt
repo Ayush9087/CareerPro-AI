@@ -1,0 +1,14 @@
+fastapi[standard]
+pydantic
+pydantic-settings
+sqlalchemy
+pgvector
+alembic
+httpx
+google-genai
+asyncpg
+psycopg2-binary
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+supabase
