@@ -1,7 +1,7 @@
 fastapi[standard]
 pydantic
 pydantic-settings
-sqlalchemy
+sqlalchemy[asyncio]
 pgvector
 alembic
 httpx
@@ -12,3 +12,5 @@ python-multipart
 python-jose[cryptography]
 passlib[bcrypt]
 supabase
+pypdf
+python-docx
